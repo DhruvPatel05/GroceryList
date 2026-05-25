@@ -28,8 +28,24 @@ struct ContentView: View {
         }
     }
 }
+#Preview ("Sample Data"){
+    let sampleData: [Item] = [
+        Item(title: "Bakery & Bread", isCompleted: false),
+        Item(title: "Meat & Seafood", isCompleted: true),
+        Item(title: "Cereals", isCompleted: .random()),
+        Item(title: "Pasta & Rice", isCompleted: .random()),
+        Item(title: "Cheese & Eggs", isCompleted: .random())
+    ]
+    let container = try! ModelContainer(for: Item.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    
+    for item in sampleData {
+        container.mainContext.insert(item)
+    }
+    return ContentView()
+        .modelContainer(container)
+}
 
-#Preview {
+#Preview ("Empty List"){
     ContentView()
         .modelContainer(for : Item.self, inMemory: true)
 }
