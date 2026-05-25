@@ -19,10 +19,6 @@ struct ContentView: View {
         modelContext.insert(Item(title: "Pasta & Rice", isCompleted: .random()))
         modelContext.insert(Item(title: "Cheese & Eggs", isCompleted: .random()))
         
-        
-        
-        
-        
     }
     var body: some View {
         NavigationStack{
@@ -34,9 +30,30 @@ struct ContentView: View {
                         .foregroundStyle(item.isCompleted == false ? Color.primary:Color.accentColor)
                         .strikethrough(item.isCompleted)
                         .italic(item.isCompleted)
+                        .swipeActions {
+                            Button(role:.destructive) {
+                                withAnimation {
+                                    modelContext.delete(item)
+                                }
+                            }
+                            label : {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
                 }
             }
             .navigationTitle("Grocery List")
+            .toolbar {
+                if items.isEmpty {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            addEssentialFoos()
+                        } label : {
+                            Label("Essential",systemImage: "carrot")
+                        }
+                    }
+                }
+            }
             .overlay {
                 if items.isEmpty
                     {
