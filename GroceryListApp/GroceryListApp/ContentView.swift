@@ -11,6 +11,19 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
+    
+    func addEssentialFoos() {
+        modelContext.insert( Item(title: "Bakery & Bread", isCompleted: false))
+        modelContext.insert(Item(title: "Meat & Seafood", isCompleted: true))
+        modelContext.insert(Item(title: "Cereals", isCompleted: .random()))
+        modelContext.insert(Item(title: "Pasta & Rice", isCompleted: .random()))
+        modelContext.insert(Item(title: "Cheese & Eggs", isCompleted: .random()))
+        
+        
+        
+        
+        
+    }
     var body: some View {
         NavigationStack{
             List{
