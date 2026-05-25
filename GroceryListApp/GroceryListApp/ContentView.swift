@@ -11,7 +11,8 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
-    
+    @State private var newItemTitle = ""
+
     func addEssentialFoos() {
         modelContext.insert( Item(title: "Bakery & Bread", isCompleted: false))
         modelContext.insert(Item(title: "Meat & Seafood", isCompleted: true))
@@ -47,24 +48,48 @@ struct ContentView: View {
                             }
                                     .tint(item.isCompleted == false ? .green: .accentColor)
                         }
-                }
-            }
-            .navigationTitle("Grocery List")
-            .toolbar {
-                if items.isEmpty {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            addEssentialFoos()
-                        } label : {
-                            Label("Essential",systemImage: "carrot")
+                    
+                    
+                        .navigationTitle("Grocery List")
+                        .toolbar {
+                            if items.isEmpty {
+                                ToolbarItem(placement: .topBarTrailing) {
+                                    Button {
+                                        addEssentialFoos()
+                                    } label : {
+                                        Label("Essential",systemImage: "carrot")
+                                    }
+                                }
+                            }
                         }
-                    }
+                        .overlay {
+                            if items.isEmpty
+                            {
+                                ContentUnavailableView("Empty Cart", systemImage: "cart.circle",description: Text("Add some items to the shopping list."))
+                            }
+                        }
                 }
             }
-            .overlay {
-                if items.isEmpty
-                    {
-                    ContentUnavailableView("Empty Cart", systemImage: "cart.circle",description: Text("Add some items to the shopping list."))
+            .safeAreaInset(edge: .bottom) {
+                VStack {
+                    TextField("", text: $newItemTitle)
+                        .textFieldStyle(.roundedBorder)
+                    Button {
+                        let trimmed = newItemTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+                        guard !trimmed.isEmpty else { return }
+                        
+                        let newItem = Item(title: trimmed, isCompleted: false)
+                        modelContext.insert(newItem)
+                        newItemTitle = ""
+                    } label: {
+                        Text("Save")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.accentColor)
+                            .foregroundColor(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .padding(.horizontal)
+                    }
                 }
             }
         }
