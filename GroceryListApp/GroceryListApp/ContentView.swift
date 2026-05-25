@@ -40,6 +40,11 @@ struct ContentView: View {
                                 Label("Delete", systemImage: "trash")
                             }
                         }
+                        .swipeActions(edge: .leading)  {
+                            Button("Done", systemImage: "checkmark.circle") {
+                                item.isCompleted.toggle()
+                            }
+                        }
                 }
             }
             .navigationTitle("Grocery List")
