@@ -62,12 +62,12 @@ struct ContentView: View {
                                 }
                             }
                         }
-                        .overlay {
-                            if items.isEmpty
-                            {
-                                ContentUnavailableView("Empty Cart", systemImage: "cart.circle",description: Text("Add some items to the shopping list."))
-                            }
-                        }
+                }
+            }
+            .overlay {
+                if items.isEmpty
+                {
+                    ContentUnavailableView("Empty Cart", systemImage: "cart.circle",description: Text("Add some items to the shopping list."))
                 }
             }
             .safeAreaInset(edge: .bottom) {
