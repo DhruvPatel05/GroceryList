@@ -71,10 +71,16 @@ struct ContentView: View {
                 }
             }
             .safeAreaInset(edge: .bottom) {
-                VStack {
+                VStack(spacing: 12) {
                     TextField("", text: $newItemTitle)
-                        .textFieldStyle(.roundedBorder)
+                        .textFieldStyle(.plain)
+                        .padding(12)
+                        .background(.tertiary)
+                        .cornerRadius(12)
+                        .font(.title.weight(.light))
                     Button {
+                        guard !items.isEmpty else { return
+                        }
                         let trimmed = newItemTitle.trimmingCharacters(in: .whitespacesAndNewlines)
                         guard !trimmed.isEmpty else { return }
                         
@@ -83,6 +89,7 @@ struct ContentView: View {
                         newItemTitle = ""
                     } label: {
                         Text("Save")
+                            .font(.title2.weight(.medium))
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color.accentColor)
@@ -90,7 +97,12 @@ struct ContentView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                             .padding(.horizontal)
                     }
+                    .buttonStyle(.borderedProminent)
+                    .buttonBorderShape(.roundedRectangle)
+                    .controlSize(.extraLarge)
                 }
+                .padding()
+                .background(.bar)
             }
         }
     }
