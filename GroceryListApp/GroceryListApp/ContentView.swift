@@ -13,6 +13,7 @@ struct ContentView: View {
     @Query private var items: [Item]
     @State private var newItemTitle = ""
 
+    @FocusState private var isFocused: Bool
     func addEssentialFoos() {
         modelContext.insert( Item(title: "Bakery & Bread", isCompleted: false))
         modelContext.insert(Item(title: "Meat & Seafood", isCompleted: true))
@@ -78,6 +79,7 @@ struct ContentView: View {
                         .background(.tertiary)
                         .cornerRadius(12)
                         .font(.title.weight(.light))
+                        .focused($isFocused)
                     Button {
                         guard !items.isEmpty else { return
                         }
@@ -87,6 +89,7 @@ struct ContentView: View {
                         let newItem = Item(title: trimmed, isCompleted: false)
                         modelContext.insert(newItem)
                         newItemTitle = ""
+                        isFocused = false
                     } label: {
                         Text("Save")
                             .font(.title2.weight(.medium))
@@ -99,7 +102,7 @@ struct ContentView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .buttonBorderShape(.roundedRectangle)
-                    .controlSize(.extraLarge)
+//                    .controlSize(.extraLarge)
                 }
                 .padding()
                 .background(.bar)
