@@ -81,11 +81,9 @@ struct ContentView: View {
                         .font(.title.weight(.light))
                         .focused($isFocused)
                     Button {
-                        guard !items.isEmpty else { return
-                        }
                         let trimmed = newItemTitle.trimmingCharacters(in: .whitespacesAndNewlines)
                         guard !trimmed.isEmpty else { return }
-                        
+
                         let newItem = Item(title: trimmed, isCompleted: false)
                         modelContext.insert(newItem)
                         newItemTitle = ""
@@ -102,7 +100,7 @@ struct ContentView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .buttonBorderShape(.roundedRectangle)
-//                    .controlSize(.extraLarge)
+                    .controlSize(.extraLarge)
                 }
                 .padding()
                 .background(.bar)
@@ -110,6 +108,7 @@ struct ContentView: View {
         }
     }
 }
+
 #Preview ("Sample Data"){
     let sampleData: [Item] = [
         Item(title: "Bakery & Bread", isCompleted: false),
