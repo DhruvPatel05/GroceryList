@@ -65,8 +65,10 @@ struct ContentView: View {
                                     .tint(item.isCompleted == false ? .green: .accentColor)
                         }
                     
-                    
-                        .navigationTitle("Grocery List")
+                }
+                
+            }
+            .navigationTitle("Grocery List")
                         .toolbar {
                             if items.isEmpty {
                                 ToolbarItem(placement: .topBarTrailing) {
@@ -80,8 +82,7 @@ struct ContentView: View {
                                 }
                             }
                         }
-                }
-            }
+            
             .overlay {
                 if items.isEmpty
                 {
@@ -99,25 +100,25 @@ struct ContentView: View {
                         .focused($isFocused)
                     Button {
                         let trimmed = newItemTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-                        guard !trimmed.isEmpty else { return }
+                            guard !trimmed.isEmpty else { return }
 
-                        let newItem = Item(title: trimmed, isCompleted: false)
-                        modelContext.insert(newItem)
-                        newItemTitle = ""
-                        isFocused = false
+                            let newItem = Item(title: trimmed, isCompleted: false)
+                            modelContext.insert(newItem)
+                            newItemTitle = ""
+                            isFocused = false
                     } label: {
                         Text("Save")
-                            .font(.title2.weight(.medium))
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.accentColor)
-                            .foregroundColor(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                            .padding(.horizontal)
+                                .font(.title3.weight(.semibold))
+                                .foregroundStyle(.white)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 56) // <- button height
+                                .background(Color.accentColor)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                                .padding(.horizontal)
                     }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(.plain)
                     .buttonBorderShape(.roundedRectangle)
-                    .controlSize(.extraLarge)
+                    .controlSize(.large)
                 }
                 .padding()
                 .background(.bar)
