@@ -22,8 +22,8 @@ The app demonstrates CRUD operations, local persistence, swipe actions, state ma
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="./IMG_7684.PNG" width="220"/>
-  <img src="./IMG_7685.PNG" width="220"/>
+  <img src="Screenshots/IMG_7684.PNG" width="220"/>
+  <img src="Screenshots/IMG_7685.PNG" width="220"/>
 </p>
 
 <p align="center">
@@ -35,8 +35,8 @@ The app demonstrates CRUD operations, local persistence, swipe actions, state ma
 <br>
 
 <p align="center">
-  <img src="./IMG_7686.PNG" width="220"/>
-  <img src="./IMG_7687.PNG" width="220"/>
+  <img src="Screenshots/IMG_7686.PNG" width="220"/>
+  <img src="Screenshots/IMG_7687.PNG" width="220"/>
 </p>
 
 <p align="center">
