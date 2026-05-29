@@ -93,10 +93,11 @@ struct ContentView: View {
                 VStack(spacing: 12) {
                     TextField("", text: $newItemTitle)
                         .textFieldStyle(.plain)
-                        .padding(12)
+                        .font(.title3.weight(.light))
+                        .padding(.horizontal,16)
+                        .frame(height: 52)
                         .background(.tertiary)
-                        .cornerRadius(12)
-                        .font(.title.weight(.light))
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
                         .focused($isFocused)
                     Button {
                         let trimmed = newItemTitle.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -108,13 +109,12 @@ struct ContentView: View {
                             isFocused = false
                     } label: {
                         Text("Save")
-                                .font(.title3.weight(.semibold))
+                            .font(.headline)
                                 .foregroundStyle(.white)
                                 .frame(maxWidth: .infinity)
-                                .frame(height: 56) // <- button height
+                                .frame(height: 52)
                                 .background(Color.accentColor)
-                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                                .padding(.horizontal)
+                                .clipShape(RoundedRectangle(cornerRadius: 14))
                     }
                     .buttonStyle(.plain)
                     .buttonBorderShape(.roundedRectangle)
